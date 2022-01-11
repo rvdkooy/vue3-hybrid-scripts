@@ -9,6 +9,12 @@ jest.mock('vue', () => {
     onMounted: (func) => {
       func();
     },
+    useSSRContext: () => {
+      return null;
+    },
+    onUnmounted: (func) => {
+      func();
+    }
   }
 });
 
@@ -26,7 +32,7 @@ const addLoadedLinkToPage = (url: string) => {
   document.head.appendChild(link);
 };
 
-describe('useHybridScripts ssr specs', () => {
+describe('useHybridScripts browser specs', () => {
   beforeEach(() => {
     jest.spyOn(utils, 'addScriptToPage').mockImplementation((url) => {
       addLoadedScriptToPage(url);
