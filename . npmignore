@@ -1,0 +1,7 @@
+!dist
+!types
+src
+index.html
+jest.config.js
+server.js
+vite.config*
