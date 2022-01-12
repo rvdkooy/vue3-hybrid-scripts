@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import HybridScriptsContext from './hybridScriptsContext';
-import useHybridScripts from './useHybridScript';
+import { useHybridScripts } from './useHybridScript';
 
 let ssrContext: { hybridScripts?: HybridScriptsContext } = { };
 

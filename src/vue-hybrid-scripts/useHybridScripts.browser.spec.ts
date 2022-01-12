@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import useHybridScripts from './useHybridScript';
+import { useHybridScripts } from './useHybridScript';
 import * as utils from './utils';
 
 jest.mock('vue', () => {

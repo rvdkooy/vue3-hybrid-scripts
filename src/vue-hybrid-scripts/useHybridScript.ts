@@ -2,7 +2,7 @@ import { onMounted, onUnmounted, useSSRContext } from 'vue';
 import HybridScriptsContext from './hybridScriptsContext';
 import { addLinkToPage, addScriptToPage, allScriptLoaded, runPromisesSequantially } from './utils';
 
-const useHybridScript = async (tag: string[] | string, cb?: () => void) => {
+export const useHybridScripts = async (tag: string[] | string, cb?: () => void) => {
   const tags = (typeof tag === 'string') ? [tag] : tag;
   const ssr = typeof window === 'undefined'
 
@@ -60,5 +60,3 @@ const useHybridScript = async (tag: string[] | string, cb?: () => void) => {
     });
   }
 };
-
-export default useHybridScript;
