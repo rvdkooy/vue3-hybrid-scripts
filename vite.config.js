@@ -1,4 +1,5 @@
-const vuePlugin = require('@vitejs/plugin-vue')
+const vuePlugin = require('@vitejs/plugin-vue');
+const typescript = require('@rollup/plugin-typescript');
 const path = require('path');
 /**
  * @type {import('vite').UserConfig}
@@ -12,7 +13,7 @@ module.exports = {
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/components/vue-hybrid-scripts/useHybridScript.ts'),
+      entry: path.resolve(__dirname, 'src/vue-hybrid-scripts/useHybridScript.ts'),
       name: 'vue3-hybrid-scripts',
       fileName: (format) => `vue3-hybrid-scripts.${format}.js`
     },
@@ -26,7 +27,7 @@ module.exports = {
         globals: {
           vue: 'Vue'
         }
-      }
+      },
     }
   }
 }

@@ -11,7 +11,8 @@ class HybridScriptsContext {
     const baseScript = `<script>function onHybridScriptLoaded(el) { el.setAttribute('data-hybrid-script-loaded', 'true');window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));}</script>`
     return `${[
       baseScript,
-      ...this.scripts].map(s => s.replace(/(?:\r\n|\r|\n)/g, '')).join('\r\n')}`
+      ...Array.from(this.scripts)
+    ].map(s => s.replace(/(?:\r\n|\r|\n)/g, '')).join('\r\n')}`
     ;
   }
 }
