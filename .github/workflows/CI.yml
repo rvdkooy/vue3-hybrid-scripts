@@ -20,6 +20,7 @@ jobs:
     - run: npm ci
     - run: npm test
   BuildAndPublish:
+    needs: QA
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
