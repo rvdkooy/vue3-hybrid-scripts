@@ -1,6 +1,5 @@
 {
   "name": "vue3-hybrid-scripts",
-  "private": true,
   "version": "0.0.1",
   "scripts": {
     "build:types": "tsc ./src/vue-hybrid-scripts/useHybridScript.ts --declaration --emitDeclarationOnly --outDir types",
@@ -25,5 +24,13 @@
     "vue": "^3.2.25",
     "vue-router": "^4.0.0",
     "vuex": "^4.0.2"
+  },
+  "main": "./dist/vue3-hybrid-scripts.umd.js",
+  "module": "./dist/vue3-hybrid-scripts.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-hybrid-scripts.es.js",
+      "require": "./dist/vue3-hybrid-scripts.umd.js"
+    }
   }
 }
