@@ -5,7 +5,8 @@
     "build:types": "tsc ./src/vue-hybrid-scripts/useHybridScript.ts --declaration --emitDeclarationOnly --outDir types",
     "build:lib": "vite build",
     "dev": "node server",
-    "test": "jest"
+    "test": "jest",
+    "bump:minor": "npm version minor"
   },
   "types": "./types",
   "devDependencies": {
