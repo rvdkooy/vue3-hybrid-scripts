@@ -3,13 +3,7 @@
 
 name: CI
 
-on:
-  push:
-    branches: [ main ]
-  create:
-    tags:
-      - v*
-
+on: push
 jobs:
   QA:
     runs-on: ubuntu-latest
