@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useHybridScripts } from '../vue-hybrid-scripts/useHybridScript';
+import { useHybridScripts } from '../vue-hybrid-scripts/main';
 
 useHybridScripts([
     'https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css',

@@ -13,7 +13,7 @@ module.exports = {
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/vue-hybrid-scripts/useHybridScript.ts'),
+      entry: path.resolve(__dirname, 'src/vue-hybrid-scripts/main.ts'),
       name: 'vue3-hybrid-scripts',
       fileName: (format) => `vue3-hybrid-scripts.${format}.js`
     },

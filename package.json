@@ -2,13 +2,13 @@
   "name": "vue3-hybrid-scripts",
   "version": "0.2.0",
   "scripts": {
-    "build:types": "tsc ./src/vue-hybrid-scripts/useHybridScript.ts --declaration --emitDeclarationOnly --outDir types",
+    "build:types": "tsc ./src/vue-hybrid-scripts/main.ts --declaration --emitDeclarationOnly --outDir types",
     "build:lib": "vite build",
     "dev": "node server",
     "test": "jest",
     "bump:minor": "npm version minor"
   },
-  "types": "./types",
+  "types": "./types/main.d.ts",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
     "@types/express": "^4.17.13",
