@@ -6,7 +6,8 @@
     "build:lib": "vite build",
     "dev": "node server",
     "test": "jest",
-    "bump:minor": "npm version minor"
+    "bump:minor": "npm version minor",
+    "bump:patch": "npm version patch"
   },
   "types": "./types/main.d.ts",
   "devDependencies": {
