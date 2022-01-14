@@ -1,3 +1,5 @@
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI status](https://github.com/rvdkooy/vue3-hybrid-scripts/workflows/CI/badge.svg) [![npm version](https://img.shields.io/npm/v/vue3-hybrid-scripts.svg?style=flat)](https://www.npmjs.com/package/vue3-hybrid-scripts)
+
 # vue3-hybrid-scripts
 
 By using this Vue3 hook you can define which external scripts a component is depending on. ‘vue-hybrid-scripts’ will manage the loading and synchronise the state of your scripts during server rendering and browser rendering.
@@ -12,9 +14,9 @@ npm install vue3-hybrid-scripts
 
 In your .vue template
 ``` javascript
-import { useHybridScript } from 'vue3-hybrid-scripts'
+import { useHybridScripts } from 'vue3-hybrid-scripts'
 
-const unregisterListener = useHybridScript('https://code.jquery.com/jquery-3.6.0.min.js', () => {
+const unregisterListener = useHybridScripts('https://code.jquery.com/jquery-3.6.0.min.js', () => {
     // this callback will be executed in your browser when script is loaded
 });
 
@@ -36,7 +38,7 @@ const scripts = ssrContext.hybridScripts.render();
 
 Use mulitple scripts at the same time:
 ``` javascript
-useHybridScript([
+useHybridScripts([
     'https://www.someurl.com/script1.js',
     'https://www.someurl.com/script1.js'
    ], () => {
@@ -46,7 +48,7 @@ useHybridScript([
 
 Javascript and css files are both supported:
 ``` javascript
-useHybridScript([
+useHybridScripts([
     'https://www.someurl.com/styles.css',
     'https://www.someurl.com/script1.js'
    ], () => {
@@ -56,7 +58,7 @@ useHybridScript([
 
 Javascript and css entries support object notations:
 ``` javascript
-useHybridScript([
+useHybridScripts([
     { href: 'https://www.someurl.com/styles.css'},
     { src: 'https://www.someurl.com/script1.js' async: true }
    ], () => {
