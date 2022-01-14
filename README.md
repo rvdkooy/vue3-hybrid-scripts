@@ -14,9 +14,9 @@ npm install vue3-hybrid-scripts
 
 In your .vue template
 ``` javascript
-import { useHybridScript } from 'vue3-hybrid-scripts'
+import { useHybridScripts } from 'vue3-hybrid-scripts'
 
-const unregisterListener = useHybridScript('https://code.jquery.com/jquery-3.6.0.min.js', () => {
+const unregisterListener = useHybridScripts('https://code.jquery.com/jquery-3.6.0.min.js', () => {
     // this callback will be executed in your browser when script is loaded
 });
 
@@ -38,7 +38,7 @@ const scripts = ssrContext.hybridScripts.render();
 
 Use mulitple scripts at the same time:
 ``` javascript
-useHybridScript([
+useHybridScripts([
     'https://www.someurl.com/script1.js',
     'https://www.someurl.com/script1.js'
    ], () => {
@@ -48,7 +48,7 @@ useHybridScript([
 
 Javascript and css files are both supported:
 ``` javascript
-useHybridScript([
+useHybridScripts([
     'https://www.someurl.com/styles.css',
     'https://www.someurl.com/script1.js'
    ], () => {
@@ -58,7 +58,7 @@ useHybridScript([
 
 Javascript and css entries support object notations:
 ``` javascript
-useHybridScript([
+useHybridScripts([
     { href: 'https://www.someurl.com/styles.css'},
     { src: 'https://www.someurl.com/script1.js' async: true }
    ], () => {
