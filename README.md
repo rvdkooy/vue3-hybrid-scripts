@@ -1,4 +1,4 @@
-![CI status](https://github.com/rvdkooy/vue3-hybrid-scripts/workflows/CI/badge.svg)
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI status](https://github.com/rvdkooy/vue3-hybrid-scripts/workflows/CI/badge.svg) [![npm version](https://img.shields.io/npm/v/vue3-hybrid-scripts.svg?style=flat)](https://www.npmjs.com/package/vue3-hybrid-scripts)
 
 # vue3-hybrid-scripts
 
