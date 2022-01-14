@@ -1,14 +1,16 @@
+import { Link, Script } from "./useHybridScript";
+
 declare global {
   interface Window {
     onHybridScriptLoaded: (el: HTMLElement) => void;
   }
 }
 
-export const addLinkToPage = (href:string): Promise<void> => {
+export const addLinkToPage = (l: Link): Promise<void> => {
   return new Promise((resolve) => {
     const link = document.createElement('link') as HTMLLinkElement
     link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('href', href);
+    link.setAttribute('href', l.href);
     link.onload = () => {
       window.onHybridScriptLoaded(link);
       resolve()
@@ -18,10 +20,10 @@ export const addLinkToPage = (href:string): Promise<void> => {
   })
 };
 
-export const addScriptToPage = (src: string): Promise<void> => {
+export const addScriptToPage = (s: Script): Promise<void> => {
   return new Promise((resolve) => {
     const script = document.createElement('script') as HTMLScriptElement
-    script.setAttribute('src', src)
+    script.setAttribute('src', s.src)
     script.onload = () => {
       console.log('onload');
       window.onHybridScriptLoaded(script);
@@ -32,15 +34,15 @@ export const addScriptToPage = (src: string): Promise<void> => {
   })
 }
 
-export const allScriptLoaded = (scripts: string[]) => {
+export const allScriptLoaded = (scripts: Array<Link | Script>) => {
   let allLoaded = false;
-  scripts.filter(s => s.indexOf('.js') !== -1).forEach((s) => {
-    const script = document.querySelector(`script[src="${s}"]`) as HTMLScriptElement;
+  scripts.filter(s => (s as Script).src).forEach((s) => {
+    const script = document.querySelector(`script[src="${(s as Script).src}"]`) as HTMLScriptElement;
     allLoaded = script.getAttribute('data-hybrid-script-loaded') === 'true';
   });
 
-  scripts.filter(s => s.indexOf('.css') !== -1).forEach((s) => {
-    const script = document.querySelector(`link[href="${s}"]`) as HTMLScriptElement;
+  scripts.filter(s => (s as Link).href).forEach((s) => {
+    const script = document.querySelector(`link[href="${(s as Link).href}"]`) as HTMLScriptElement;
     allLoaded = script.getAttribute('data-hybrid-script-loaded') === 'true';
   });
 

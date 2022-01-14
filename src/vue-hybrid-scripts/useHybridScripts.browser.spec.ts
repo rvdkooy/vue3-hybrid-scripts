@@ -34,12 +34,12 @@ const addLoadedLinkToPage = (url: string) => {
 
 describe('useHybridScripts browser specs', () => {
   beforeEach(() => {
-    jest.spyOn(utils, 'addScriptToPage').mockImplementation((url) => {
-      addLoadedScriptToPage(url);
+    jest.spyOn(utils, 'addScriptToPage').mockImplementation((script) => {
+      addLoadedScriptToPage(script.src);
       return Promise.resolve();
     });
-    jest.spyOn(utils, 'addLinkToPage').mockImplementation((url) => {
-      addLoadedLinkToPage(url);
+    jest.spyOn(utils, 'addLinkToPage').mockImplementation((link) => {
+      addLoadedLinkToPage(link.href);
       return Promise.resolve();
     });
   });
@@ -92,6 +92,17 @@ describe('useHybridScripts browser specs', () => {
     useHybridScripts([
       'http://localhost:8080/static/test.js',
       'http://localhost:8080/static/test.css',
+    ], () => {
+      expect(utils.addScriptToPage).toHaveBeenCalled();
+      expect(utils.addLinkToPage).toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('it should support script and link objects as arguments', (done) => {
+    useHybridScripts([
+      { src: 'http://localhost:8080/static/test.js', async: true, defer: true },
+      { href: 'http://localhost:8080/static/test.css' },
     ], () => {
       expect(utils.addScriptToPage).toHaveBeenCalled();
       expect(utils.addLinkToPage).toHaveBeenCalled();

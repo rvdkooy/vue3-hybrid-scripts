@@ -1,17 +1,34 @@
+import { Link, Script } from "./useHybridScript";
+
 class HybridScriptsContext {
-  private scripts: Set<string>;
+  private scripts: Set<Script>;
+  private links: Set<Link>
   constructor () {
     this.scripts = new Set();
+    this.links = new Set();
   }
-  public addScript (script: string) {
+  public addScript (script: Script) {
     this.scripts.add(script);
+  }
+  public addLink (link: Link) {
+    this.links.add(link);
   }
 
   public renderSsrContext() {
+    const scriptsString = Array.from(this.scripts).map(s => {
+      let result = `<script src="${s.src}"`;
+      result += s.async ? ' async' : '';
+      result += s.async ? ' defer': '';
+      result += ` onload="onHybridScriptLoaded(this)"></script>`;
+      return result;
+    })
+    const linksString = Array.from(this.links).map(s => `<link href="${s.href}" rel="stylesheet" onload="onHybridScriptLoaded(this)"></link>`)
+    
     const baseScript = `<script>function onHybridScriptLoaded(el) { el.setAttribute('data-hybrid-script-loaded', 'true');window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));}</script>`
     return `${[
       baseScript,
-      ...Array.from(this.scripts)
+      ...scriptsString,
+      ...linksString,
     ].map(s => s.replace(/(?:\r\n|\r|\n)/g, '')).join('\r\n')}`
     ;
   }
