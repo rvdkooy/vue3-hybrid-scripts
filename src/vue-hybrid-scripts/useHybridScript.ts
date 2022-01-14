@@ -14,7 +14,7 @@ export interface Link {
 
 export type tagArgs = Array<string | Script | Link> | string | Script | Link;
 
-export const useHybridScripts = async (tag: tagArgs, cb?: () => void) => {
+export const useHybridScripts = (tag: tagArgs, cb?: () => void) => {
   let makeArray: Array<string | Script | Link>;
   if (Array.isArray(tag)) {
     makeArray = tag;
@@ -49,30 +49,29 @@ export const useHybridScripts = async (tag: tagArgs, cb?: () => void) => {
   } else {
     const listenToHybridScriptLoaded = () => {
       if (allScriptLoaded(tags)) {
-        cb();
         window.removeEventListener('hybrid-script-loaded', listenToHybridScriptLoaded);
+        cb();
       }
     }
 
-    onMounted(async () => {
-      if (!window.onHybridScriptLoaded) {
-        window.onHybridScriptLoaded = function onHybridScriptLoaded(el) {
-          el.setAttribute('data-hybrid-script-loaded', 'true');
-          window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));
-        }
+    if (!window.onHybridScriptLoaded) {
+      window.onHybridScriptLoaded = function onHybridScriptLoaded(el) {
+        el.setAttribute('data-hybrid-script-loaded', 'true');
+        window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));
       }
-      const scriptsThatAreNotOnThePage = tags
-        .filter(s => (s as Script).src)
-        .filter(s => !document.querySelector(`script[src="${(s as Script).src}"]`));
-      const linksThatAreNotOnThePage = tags
-        .filter(s => (s as Link).href)
-        .filter(s => !document.querySelector(`link[href="${(s as Link).href}"]`))
-      const addTagsFuncs = [
-        ...linksThatAreNotOnThePage.map(s => () => addLinkToPage(s as Link)),
-        ...scriptsThatAreNotOnThePage.map(s => () => addScriptToPage(s as Script)),
-      ]
-      await runPromisesSequantially(addTagsFuncs);
+    }
+    const scriptsThatAreNotOnThePage = tags
+      .filter(s => (s as Script).src)
+      .filter(s => !document.querySelector(`script[src="${(s as Script).src}"]`));
+    const linksThatAreNotOnThePage = tags
+      .filter(s => (s as Link).href)
+      .filter(s => !document.querySelector(`link[href="${(s as Link).href}"]`))
+    const addTagsFuncs = [
+      ...linksThatAreNotOnThePage.map(s => () => addLinkToPage(s as Link)),
+      ...scriptsThatAreNotOnThePage.map(s => () => addScriptToPage(s as Script)),
+    ]
 
+    runPromisesSequantially(addTagsFuncs).then(() => {
       if (allScriptLoaded(tags)) {
         cb();
       } else {
@@ -80,8 +79,8 @@ export const useHybridScripts = async (tag: tagArgs, cb?: () => void) => {
       }
     });
 
-    onUnmounted(() => {
+    return () => {
       window.removeEventListener('hybrid-script-loaded', listenToHybridScriptLoaded);
-    });
+    }
   }
 };

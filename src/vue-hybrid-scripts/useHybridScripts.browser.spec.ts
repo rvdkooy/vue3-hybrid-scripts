@@ -6,15 +6,9 @@ import * as utils from './utils';
 
 jest.mock('vue', () => {
   return {
-    onMounted: (func) => {
-      func();
-    },
     useSSRContext: () => {
       return null;
     },
-    onUnmounted: (func) => {
-      func();
-    }
   }
 });
 

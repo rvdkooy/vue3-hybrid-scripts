@@ -8,7 +8,6 @@ let ssrContext: { hybridScripts?: HybridScriptsContext } = { };
 
 jest.mock('vue', () => {
   return {
-    onMounted: () => {},
     useSSRContext: () => {
       return ssrContext;
     },
