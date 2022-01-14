@@ -1,3 +1,5 @@
+![CI status](https://github.com/rvdkooy/vue3-hybrid-scripts/actions/workflows/CI/badge.svg)
+
 # vue3-hybrid-scripts
 
 By using this Vue3 hook you can define which external scripts a component is depending on. ‘vue-hybrid-scripts’ will manage the loading and synchronise the state of your scripts during server rendering and browser rendering.
