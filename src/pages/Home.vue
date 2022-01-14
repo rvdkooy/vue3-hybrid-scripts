@@ -17,7 +17,7 @@ import { useHybridScripts } from '../vue-hybrid-scripts/main';
 useHybridScripts([
     'https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css',
     'https://code.jquery.com/jquery-3.6.0.min.js',
-    'https://code.jquery.com/ui/1.13.0/jquery-ui.min.js',
+    { src: 'https://code.jquery.com/ui/1.13.0/jquery-ui.min.js', async: true },
   ],
   () => {
     $( "#dialog-message" ).dialog();

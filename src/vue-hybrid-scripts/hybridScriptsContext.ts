@@ -18,7 +18,7 @@ class HybridScriptsContext {
     const scriptsString = Array.from(this.scripts).map(s => {
       let result = `<script src="${s.src}"`;
       result += s.async ? ' async' : '';
-      result += s.async ? ' defer': '';
+      result += s.defer ? ' defer': '';
       result += ` onload="onHybridScriptLoaded(this)"></script>`;
       return result;
     })
@@ -27,8 +27,8 @@ class HybridScriptsContext {
     const baseScript = `<script>function onHybridScriptLoaded(el) { el.setAttribute('data-hybrid-script-loaded', 'true');window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));}</script>`
     return `${[
       baseScript,
-      ...scriptsString,
       ...linksString,
+      ...scriptsString,
     ].map(s => s.replace(/(?:\r\n|\r|\n)/g, '')).join('\r\n')}`
     ;
   }
