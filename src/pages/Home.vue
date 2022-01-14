@@ -12,9 +12,10 @@
 </template>
 
 <script setup lang="ts">
+import { onUnmounted } from 'vue';
 import { useHybridScripts } from '../vue-hybrid-scripts/main';
 
-useHybridScripts([
+const cleanup = useHybridScripts([
     'https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css',
     'https://code.jquery.com/jquery-3.6.0.min.js',
     { src: 'https://code.jquery.com/ui/1.13.0/jquery-ui.min.js', async: true },
@@ -22,6 +23,8 @@ useHybridScripts([
   () => {
     $( "#dialog-message" ).dialog();
 });
+
+onUnmounted(cleanup);
 
 </script>
 

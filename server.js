@@ -71,7 +71,7 @@ async function createServer(
         .replace(`<!--preload-links-->`, preloadLinks)
         .replace(`<!--app-html-->`, appHtml)
         // .replace(`<!--teleports.head-->`, teleports.head)
-        .replace(`<!--hybridScripts-->`, (hybridScripts?.renderSsrContext() || ''))
+        .replace(`<!--hybridScripts-->`, (hybridScripts?.render() || ''))
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

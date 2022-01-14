@@ -14,7 +14,7 @@ class HybridScriptsContext {
     this.links.add(link);
   }
 
-  public renderSsrContext() {
+  public render() {
     const scriptsString = Array.from(this.scripts).map(s => {
       let result = `<script src="${s.src}"`;
       result += s.async ? ' async' : '';

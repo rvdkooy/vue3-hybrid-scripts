@@ -22,7 +22,7 @@ describe('useHybridScripts ssr specs', () => {
   it('it should add scripts and links to the ssr context', () => {
     useHybridScripts('https://code.jquery.com/jquery-3.6.0.min.js');
 
-    const renderedSrrContext = ssrContext.hybridScripts.renderSsrContext();
+    const renderedSrrContext = ssrContext.hybridScripts.render();
     expect(renderedSrrContext).toContain(`<script>function onHybridScriptLoaded(el) { el.setAttribute('data-hybrid-script-loaded', 'true');window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));}</script>`);
     expect(renderedSrrContext).toContain(`<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\" onload=\"onHybridScriptLoaded(this)\"></script>`);
   });
@@ -30,7 +30,7 @@ describe('useHybridScripts ssr specs', () => {
   it('it should add css links to to ssr context', () => {
     useHybridScripts('https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css');
 
-    const renderedSrrContext = ssrContext.hybridScripts.renderSsrContext();
+    const renderedSrrContext = ssrContext.hybridScripts.render();
     expect(renderedSrrContext).toContain(`<script>function onHybridScriptLoaded(el) { el.setAttribute('data-hybrid-script-loaded', 'true');window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));}</script>`);
     expect(renderedSrrContext).toContain(`<link href=\"https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css\" rel=\"stylesheet\" onload=\"onHybridScriptLoaded(this)\"></link>`);
   });
@@ -41,7 +41,7 @@ describe('useHybridScripts ssr specs', () => {
       { href: 'http://localhost:8080/static/test.css' },
     ]);
 
-    const renderedSrrContext = ssrContext.hybridScripts.renderSsrContext();
+    const renderedSrrContext = ssrContext.hybridScripts.render();
     expect(renderedSrrContext).toContain(`<link href=\"http://localhost:8080/static/test.css\" rel=\"stylesheet\" onload=\"onHybridScriptLoaded(this)\"></link>`);
     expect(renderedSrrContext).toContain(`<script src=\"http://localhost:8080/static/test.js\" async defer onload=\"onHybridScriptLoaded(this)\"></script>`);
   });
