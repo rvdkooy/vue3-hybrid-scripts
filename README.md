@@ -2,7 +2,8 @@
 
 # vue3-hybrid-scripts
 
-By using this Vue3 hook you can define which external scripts a component is depending on. ‘vue-hybrid-scripts’ will manage the loading and synchronise the state of your scripts during server rendering and browser rendering.
+Often your Vue app is depending on 3rd party scripts like: Google Tag Manager, Advertising scripts, Tracking or just a script that you need to load from a CDN.
+By using this Vue3 hook you can define 3rd party scripts in any Vue component you want. ‘vue-hybrid-scripts’ will then make sure your script(s) will be available both server side as client side and will notify when ready.
 
 ## installation
 
