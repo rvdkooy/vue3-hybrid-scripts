@@ -1,5 +1,5 @@
-import { onMounted, onUnmounted, useSSRContext } from 'vue';
-import HybridScriptsContext from './hybridScriptsContext';
+import { useSSRContext } from 'vue';
+import { HybridScriptsContext } from './main';
 import { addLinkToPage, addScriptToPage, allScriptLoaded, runPromisesSequantially } from './utils';
 
 export interface Script {
