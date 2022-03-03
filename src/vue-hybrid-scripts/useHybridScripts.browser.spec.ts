@@ -15,6 +15,7 @@ jest.mock('vue', () => {
 const addLoadedScriptToPage = (url: string) => {
   const script = document.createElement('script');
   script.src = url;
+  script.setAttribute('data-hybrid-script-id', url);
   script.setAttribute('data-hybrid-script-loaded', 'true');
   document.head.appendChild(script);
 };
@@ -22,6 +23,7 @@ const addLoadedScriptToPage = (url: string) => {
 const addLoadedLinkToPage = (url: string) => {
   const link = document.createElement('link');
   link.href = url;
+  link.setAttribute('data-hybrid-script-id', url);
   link.setAttribute('data-hybrid-script-loaded', 'true');
   document.head.appendChild(link);
 };
@@ -49,7 +51,7 @@ describe('useHybridScripts browser specs', () => {
   it('it should add javascripts to the page when not yet available and resolve', (done) => {
     useHybridScripts('http://localhost:8080/static/test.js', () => {
       expect(utils.addScriptToPage).toHaveBeenCalled();
-      expect(document.querySelector('script[src="http://localhost:8080/static/test.js"]')).toBeDefined();
+      expect(document.querySelector('script[data-hybrid-script-id="http://localhost:8080/static/test.js"]')).not.toBe(null);
       done();
     });
   });
@@ -59,7 +61,7 @@ describe('useHybridScripts browser specs', () => {
 
     useHybridScripts('http://localhost:8080/static/test.js', () => {
       expect(utils.addScriptToPage).not.toHaveBeenCalled();
-      expect(document.querySelector('script[src="http://localhost:8080/static/test.js"]')).toBeDefined();
+      expect(document.querySelector('script[data-hybrid-script-id="http://localhost:8080/static/test.js"]')).not.toBe(null);;
       done();
     });
   });
@@ -67,7 +69,7 @@ describe('useHybridScripts browser specs', () => {
   it('it should add links to the page when not yet available and resolve', (done) => {
     useHybridScripts('http://localhost:8080/static/test.css', () => {
       expect(utils.addLinkToPage).toHaveBeenCalled();
-      expect(document.querySelector('script[src="http://localhost:8080/static/test.css"]')).toBeDefined();
+      expect(document.querySelector('link[data-hybrid-script-id="http://localhost:8080/static/test.css"]')).not.toBe(null);;
       done();
     });
   });
@@ -77,7 +79,7 @@ describe('useHybridScripts browser specs', () => {
 
     useHybridScripts('http://localhost:8080/static/test.css', () => {
       expect(utils.addLinkToPage).not.toHaveBeenCalled();
-      expect(document.querySelector('script[src="http://localhost:8080/static/test.css"]')).toBeDefined();
+      expect(document.querySelector('link[data-hybrid-script-id="http://localhost:8080/static/test.css"]')).not.toBe(null);;
       done();
     });
   });

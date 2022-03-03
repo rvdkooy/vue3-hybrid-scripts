@@ -62,10 +62,10 @@ export const useHybridScripts = (tag: tagArgs, cb?: () => void) => {
     }
     const scriptsThatAreNotOnThePage = tags
       .filter(s => (s as Script).src)
-      .filter(s => !document.querySelector(`script[src="${(s as Script).src}"]`));
+      .filter(s => !document.querySelector(`script[data-hybrid-script-id="${(s as Script).src}"]`));
     const linksThatAreNotOnThePage = tags
       .filter(s => (s as Link).href)
-      .filter(s => !document.querySelector(`link[href="${(s as Link).href}"]`))
+      .filter(s => !document.querySelector(`link[data-hybrid-script-id="${(s as Link).href}"]`))
     const addTagsFuncs = [
       ...linksThatAreNotOnThePage.map(s => () => addLinkToPage(s as Link)),
       ...scriptsThatAreNotOnThePage.map(s => () => addScriptToPage(s as Script)),

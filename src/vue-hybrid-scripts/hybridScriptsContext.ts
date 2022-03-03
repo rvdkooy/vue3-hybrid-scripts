@@ -16,13 +16,13 @@ class HybridScriptsContext {
 
   public render() {
     const scriptsString = Array.from(this.scripts).map(s => {
-      let result = `<script src="${s.src}"`;
+      let result = `<script src="${s.src}" data-hybrid-script-id="${s.src}"`;
       result += s.async ? ' async' : '';
       result += s.defer ? ' defer': '';
       result += ` onload="onHybridScriptLoaded(this)"></script>`;
       return result;
     })
-    const linksString = Array.from(this.links).map(s => `<link href="${s.href}" rel="stylesheet" onload="onHybridScriptLoaded(this)"></link>`)
+    const linksString = Array.from(this.links).map(s => `<link href="${s.href}" data-hybrid-script-id="${s.href}" rel="stylesheet" onload="onHybridScriptLoaded(this)">`)
     
     const baseScript = `<script>function onHybridScriptLoaded(el) { el.setAttribute('data-hybrid-script-loaded', 'true');window.dispatchEvent(new CustomEvent('hybrid-script-loaded'));}</script>`
     return `${[
