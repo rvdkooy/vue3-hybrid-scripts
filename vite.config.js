@@ -15,7 +15,14 @@ module.exports = {
     lib: {
       entry: path.resolve(__dirname, 'src/vue-hybrid-scripts/main.ts'),
       name: 'vue3-hybrid-scripts',
-      fileName: (format) => `vue3-hybrid-scripts.${format}.js`
+      fileName: (format) => {
+        if (format === 'es') {
+          return `vue3-hybrid-scripts.es.mjs`;
+        }
+        if (format === 'umd') {
+          return `vue3-hybrid-scripts.umd.js`;
+        }
+      } 
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
