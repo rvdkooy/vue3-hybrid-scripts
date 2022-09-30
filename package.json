@@ -1,6 +1,6 @@
 {
   "name": "vue3-hybrid-scripts",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "scripts": {
     "build:types": "tsc ./src/vue-hybrid-scripts/main.ts --declaration --emitDeclarationOnly --outDir types",
     "build:lib": "vite build",
